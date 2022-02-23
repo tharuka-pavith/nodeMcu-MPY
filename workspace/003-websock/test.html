@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Client</title>
+</head>
+
+<body>
+    <div class="center">
+        <h3 id="h">LED off!</h3>
+        <button id="btn" onclick="clickedBlink()">Click</button>
+        <p id="msg_in"></p>
+    </div>
+    <script>
+         var ws = new WebSocket("ws://" + location.hostname + ":80");
+         var state = 0;
+         var count = 0;
+         ws.onopen = function () {
+             var msg = window.prompt("Enter message: ")
+             ws.send(msg);
+         };
+ 
+         ws.onmessage = function (evt) {
+             document.getElementById("msg_in").innerHTML = evt.data;
+         };
+ 
+         function clickedBlink() {
+             count++;
+             if(state == 0){
+                 state = 1;
+                 ws.send(1);
+                 document.getElementById("h").innerHTML = "LED on!";
+             }else{
+                 state = 0;
+                 ws.send(0);
+                 document.getElementById("h").innerHTML = "LED off!";
+             }
+         }
+    </script>
+
+    <style>
+        .center {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+        }
+    </style>
+</body>
+
+</html>
