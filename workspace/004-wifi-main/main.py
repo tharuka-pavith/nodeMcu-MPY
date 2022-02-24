@@ -1,7 +1,7 @@
 #main.py
 #runs after boot.py
 
-import network
+import network, timer
 
 ACTIVATE_STA = False #Toggle here to activate/deactivate
 
@@ -18,6 +18,9 @@ if ACTIVATE_STA:
     print("Error: cannot connnect to AP")
   finally:
     gc.collect()
+
+
+timer.start_timer()
 
 
 
