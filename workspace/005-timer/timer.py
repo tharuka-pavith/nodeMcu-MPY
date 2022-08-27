@@ -8,12 +8,12 @@ class Led:
    
   def blink(self,t):
     self.led.value(0)
-    time.sleep_ms(50)
+    time.sleep_ms(100)
     self.led.value(1)
  
 
 def start_timer():
- led = Led(2)
+ led = Led(2) #builtin LED is at pin 2
  tmr = Timer(-1)
  try:
    tmr.init(period=5000, mode=Timer.PERIODIC, callback=led.blink)
@@ -29,4 +29,5 @@ if __name__ == '__main__':
   
   
   
+
 
